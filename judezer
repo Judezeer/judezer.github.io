@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakita Kita by Ginoong Ralph</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Indie+Flower&family=Permanent+Marker&display=swap');
+        
+        body {
+            background-color: #fff5f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Indie Flower', cursive;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .flower-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,20 C55,15 65,15 70,20 C75,25 75,35 70,40 C65,45 55,45 50,40 C45,45 35,45 30,40 C25,35 25,25 30,20 C35,15 45,15 50,20 Z" fill="none" stroke="%23ffb6c1" stroke-width="1" opacity="0.2"/><circle cx="50" cy="30" r="5" fill="%23ffb6c1" opacity="0.2"/></svg>');
+            background-size: 200px 200px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .notebook-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            transform: rotate(1deg);
+            z-index: 1;
+        }
+
+        .notebook {
+            background-color: #fff;
+            border: 1px solid #ffb6c1;
+            border-radius: 5px;
+            padding: 40px 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+            background-image: linear-gradient(#fff 1.1em, #ffebee 1.1em);
+            background-size: 100% 1.2em;
+            line-height: 1.2em;
+            z-index: 1;
+        }
+
+        .notebook:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 30px;
+            height: 100%;
+            width: 1px;
+            border-left: 1px dashed #ffb6c1;
+        }
+
+        .song-title {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            color: #d23669;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .artist-name {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            color: #ff6b81;
+            font-size: 1.8rem;
+            margin-top: -25px;
+            margin-bottom: 30px;
+        }
+
+        .lyrics {
+            margin-left: 40px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .chords {
+            color: #d23669;
+            font-weight: bold;
+            margin-right: 5px;
+            display: inline-block;
+            width: 40px;
+            text-align: right;
+        }
+
+        .lyrics-section {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-label {
+            position: absolute;
+            left: -70px;
+            top: 0;
+            font-family: 'Permanent Marker', cursive;
+            color: #ff6b81;
+            font-size: 0.9rem;
+            transform: rotate(-5deg);
+        }
+
+        .tagalog {
+            font-style: italic;
+        }
+
+        .flower {
+            position: absolute;
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        .flower-1 {
+            top: -20px;
+            left: -25px;
+            transform: rotate(-15deg);
+            width: 80px;
+        }
+
+        .flower-2 {
+            bottom: -15px;
+            right: -20px;
+            transform: rotate(10deg);
+            width: 70px;
+        }
+
+        .pencil {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%) rotate(10deg);
+            width: 150px;
+            z-index: 2;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+            opacity: 0.9;
+        }
+
+        .play-btn {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background-color: #ff4757;
+            transform: scale(1.05);
+        }
+
+        .music-player {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #d23669;
+        }
+
+        .date {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .notebook-container {
+                width: 95%;
+                margin: 30px auto;
+            }
+            
+            .pencil {
+                right: -30px;
+                width: 100px;
+            }
+            
+            .flower-1, .flower-2 {
+                width: 60px;
+            }
+            
+            .song-title {
+                font-size: 2.2rem;
+            }
+            
+            .artist-name {
+                font-size: 1.4rem;
+                margin-top: -15px;
+            }
+            
+            .section-label {
+                left: -60px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-bg"></div>
+    
+    <div class="notebook-container">
+        <!-- Flowers decoration -->
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" class="flower flower-1">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" class="flower flower-2">
+        
+        <!-- Pencil decoration -->
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,90 L80,30 L90,40 L30,100 Z' fill='%23ff6b81'/><path d='M80,30 L90,20 L80,10 L70,20 Z' fill='%23d23669'/><path d='M70,20 L80,10 L90,20 L80,30 Z' fill='%23ff4757'/><path d='M80,30 L90,20 L100,30 L90,40 Z' fill='%23ff6b81'/></svg>" class="pencil">
+        
+        <div class="notebook">
+            <h1 class="song-title">Nakita Kita</h1>
+            <div class="artist-name">by Ginoong Ralph</div>
+            
+            <div class="lyrics">
+                <div class="lyrics-section">
+                    <div class="section-label">Verse 1</div>
+                    <p><span class="chords">F#</span> <span class="tagalog">Sa unang sulyap pa lamang, ako'y nabihag</span></p>
+                    <p><span class="chords">G#</span> <span class="tagalog">Ang iyong mga ngiti'y tila bulalakaw</span></p>
+                    <p><span class="chords">C#</span> <span class="tagalog">Sa dagat ng mga mukha, ikaw ang tala</span></p>
+                    <p><span class="chords">A#M</span> <span class="tagalog">Nabutas ang ulap, ang puso ko'y nag-init...</span></p>
+                </div>
+                
+                <div class="lyrics-section">
+                    <div class="section-label">Verse 2</div>
+                    <p><span class="chords">F#</span> Like morning dew on petals soft</p>
+                    <p><span class="chords">G#</span> Your gentle grace left me aloft</p>
+                    <p><span class="chords">C#</span> The way your laughter fills the air</span></p>
+                    <p><span class="chords">A#M</span> Makes ordinary moments rare...</p>
+                </div>
+                
+                <div class="lyrics-section">
+                    <div class="section-label">Chorus</div>
+                    <p><span class="chords">F#</span> <span class="tagalog">Nakita kita sa ilalim ng araw</span></p>
+                    <p><span class="chords">G#</span> <span class="tagalog">Ang bawat galaw mo'y tula ang dating</span></p>
+                    <p><span class="chords">C#</span> <span class="tagalog">Parang awiting 'di na masusulat</span></p>
+                    <p><span class="chords">A#M</span> <span class="tagalog">Habang ang puso ko'y nagkakandarapa...</span></p>
+                    <p><span class="chords">F#</span> <span class="tagalog">Nakita kita, at mundo'y nag-iba</span></p>
+                    <p><span class="chords">G#</span> <span class="tagalog">Ang dating ordinaryo'y biglang sumigla</span></p>
+                    <p><span class="chords">C#</span> <span class="tagalog">Parang kanta sa gitna ng gulo</span></p>
+                    <p><span class="chords">A#M</span> <span class="tagalog">Ikaw ang nagbigay ng nota't himig ko...</span></p>
+                </div>
+                
+                <div class="lyrics-section">
+                    <div class="section-label">Verse 3</div>
+                    <p><span class="chords">F#</span> Between the pages of my books</p>
+                    <p><span class="chords">G#</span> I find myself stealing looks</p>
+                    <p><span class="chords">C#</span> Not at the words but at your face</span></p>
+                    <p><span class="chords">A#M</span> The loveliest charm in any place...</p>
+                </div>
+                
+                <div class="lyrics-section">
+                    <div class="section-label">(Chorus)</div>
+                    <p><span class="chords">F#</span> <span class="tagalog">Nakita kita sa ilalim ng araw</span></p>
+                    <p><span class="chords">G#</span> <span class="tagalog">Ang bawat galaw mo'y tula ang dating</span></p>
+                    <p><span class="chords">C#</span> <span class="tagalog">Parang awiting 'di na masusulat</span></p>
+                    <p><span class="chords">A#M</span> <span class="tagalog">Habang ang puso ko'y nagkakandarapa...</span></p>
+                </div>
+                
+                <div class="lyrics-section">
+                    <div class="section-label">Outro</div>
+                    <p><span class="chords">C#</span> <span class="tagalog">Sana hindi lang pangarap na lumilipad</span></p>
+                    <p><span class="chords">F#</span> <span class="tagalog">Ang bawat sandali na iyong babalik</span></p>
+                    <p><span class="chords">G#</span> <span class="tagalog">At sa wakas ay mapapagbigyan</span></p>
+                    <p><span class="chords">A#M</span> <span class="tagalog">Ang awiting ito ng pusong nagmamahal...</span></p>
+                </div>
+            </div>
+            
+            <div class="music-player">
+                <button class="play-btn" id="playBtn">Play Song</button>
+                <audio id="songAudio" loop>
+                    <!-- Audio will be generated by JavaScript -->
+                </audio>
+            </div>
+            
+            <div class="signature">Para sa'yo</div>
+            <div class="date">Today's Date</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const playBtn = document.getElementById('playBtn');
+            const audioElement = document.getElementById('songAudio');
+            let isPlaying = false;
+            
+            // Create simple melody for the song using the Web Audio API
+            function generateSimpleMelody() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const chords = {
+                        'F#': [370.0, 466.16, 554.37],  // F#3, A#3, C#4
+                        'G#': [415.3, 523.25, 622.25],  // G#3, C4, D#4
+                        'C#': [277.18, 369.99, 554.37], // C#3, F#3, A#3
+                        'A#M': [466.16, 554.37, 698.46] // A#3, C#4, F4
+                    };
+                    
+                    let melody = [];
+                    const sequence = ['F#', 'G#', 'C#', 'A#M']; // Chord progression based on song structure
+                    
+                    sequence.forEach(chord => {
+                        chords[chord].forEach(freq => {
+                            const oscillator = audioContext.createOscillator();
+                            const gainNode = audioContext.createGain();
+                            
+                            oscillator.type = 'sine';
+                            oscillator.frequency.value = freq;
+                            
+                            gainNode.gain.value = 0.15;
+                            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                            
+                            oscillator.connect(gainNode);
+                            gainNode.connect(audioContext.destination);
+                            
+                            oscillator.start();
+                            oscillator.stop(audioContext.currentTime + 1);
+                        });
+                    });
+                    
+                    return melody;
+                } catch(e) {
+                    console.error("Web Audio API not supported:", e);
+                    return null;
+                }
+            }
+            
+            playBtn.addEventListener('click', function() {
+                if (!isPlaying) {
+                    generateSimpleMelody();
+                    playBtn.textContent = 'Pause Song';
+                    isPlaying = true;
+                } else {
+                    // In a real implementation, we'd pause the audio
+                    playBtn.textContent = 'Play Song';
+                    isPlaying = false;
+                }
+            });
+            
+            // Set today's date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.querySelector('.date').textContent = today.toLocaleDateString('en-US', options);
+             <a href="https://www.Judezer.com"
+            
+        });
+    </script>
+</body>
+</html>
